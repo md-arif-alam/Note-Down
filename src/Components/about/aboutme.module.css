@@ -1,0 +1,88 @@
+:root {
+	--angle: 45deg;
+	--opacity: 0.5;
+  }
+  
+  *,
+  *::before,
+  *::after {
+	box-sizing: border-box;
+  }
+
+
+  .rainbow {
+	width: 850px;
+	height: 400px;
+	border-radius: 10px;
+	padding: 10rem;
+	margin: auto;
+    margin-top: 100px;
+	display: grid;
+	place-content: center;
+	text-align: center;
+  
+	font-size: 1.5em;
+  
+	--border-size: 0.3rem;
+	border: var(--border-size) solid transparent;
+  
+	
+	border-image: conic-gradient(
+		from var(--angle),
+		#d53e33 0deg 90deg,
+		#fbb300 90deg 180deg,
+		#377af5 180deg 270deg,
+		#399953 270deg 360deg
+	  )
+	  1 stretch;
+	background: rgb(255 255 255 / var(--opacity));
+  }
+ 
+  
+
+
+  @supports (background: paint(houdini)) {
+	@property --opacity {
+	  syntax: "<number>";
+	  initial-value: 0.5;
+	  inherits: false;
+	}
+  
+	@property --angle {
+	  syntax: "<angle>";
+	  initial-value: 0deg;
+	  inherits: false;
+	}
+  
+	@keyframes opacityChange {
+	  to {
+		--opacity: 1;
+	  }
+	}
+  
+	@keyframes rotate {
+	  to {
+		--angle: 360deg;
+	  }
+	}
+  
+	.rainbow {
+	  animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+	}
+
+  }
+  
+  @media (max-width:650px){
+    .rainbow {
+		width: 350px;
+		height: 700px;
+		border-radius: 30px;
+		padding: 1.2rem;
+		margin: auto;
+		display: grid;
+		place-content: center;
+		text-align: center;
+		font-size: 1.8em;
+	} 
+   
+  } 
